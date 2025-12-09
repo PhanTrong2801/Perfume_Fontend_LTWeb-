@@ -40,7 +40,7 @@ function CartPage() {
         if(!window.confirm("Bạn chắc chắn muốn xóa?")) return;
         
         const token = localStorage.getItem('token');
-        axios.delete(`http://127.0.0.1:8000/api/cart/remove/${itemId}`, {
+        axios.delete(`${API_URL}/api/cart/remove/${itemId}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(() => {
@@ -54,7 +54,7 @@ function CartPage() {
         if(newQuantity < 1) return;
 
         const token = localStorage.getItem('token');
-        axios.put(`http://127.0.0.1:8000/api/cart/update/${itemId}`, 
+        axios.put(`${API_URL}/api/cart/update/${itemId}`, 
             { quantity: newQuantity },
             { headers: { Authorization: `Bearer ${token}` } }
         )
