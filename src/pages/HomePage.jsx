@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const HomePage = () => {
     const [products, setProducts] = useState([]); // Chứa danh sách sản phẩm
     const [loading, setLoading] = useState(true);
-    const API_URL =import.meta.env.VITE_API_URL; 
+    const API_URL = import.meta.env.VITE_API_BASE_URL;
 
     // Gọi API khi component được mount
     useEffect(() => {

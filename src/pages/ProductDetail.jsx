@@ -10,7 +10,7 @@ function ProductDetail() {
     const [selectedVariant, setSelectedVariant] = useState(null);
     const [quantity, setQuantity] = useState(1); // Thêm state số lượng mua
 
-    const API_URL =import.meta.env.VITE_API_URL;
+    const API_URL = import.meta.env.VITE_API_BASE_URL;
     useEffect(() => {
         axios.get(`${API_URL}/api/products/${id}`)
             .then(res => {

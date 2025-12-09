@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
+
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    const API_URL =import.meta.env.VITE_API_URL;
+    const API_URL = import.meta.env.VITE_API_BASE_URL;
 
     // Hàm lấy dữ liệu giỏ hàng
     const fetchCart = () => {
