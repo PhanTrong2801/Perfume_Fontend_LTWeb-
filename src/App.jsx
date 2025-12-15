@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import CartPage from './pages/CartPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import AdminLayout from './components/AdminLayout.jsx';
+import AdminOrderPage from './pages/admin/AdminOrderPage.jsx';
 
 function App() {
   const navigate = useNavigate();
