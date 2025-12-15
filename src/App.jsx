@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import CartPage from './pages/CartPage';
+import OrderHistoryPage from './pages/OrderHistoryPage';
 
 function App() {
   const navigate = useNavigate();
@@ -47,6 +48,10 @@ function App() {
               <li className="nav-item">
                 <Link className="nav-link" to="/cart">Giỏ hàng</Link>
               </li>
+              
+              <li className="nav-item">
+                  <Link className="nav-link" to="/orders">Đơn mua</Link>
+              </li>
 
               {user ? (
                 <li className="nav-item ms-3 d-flex align-items-center gap-2">
@@ -77,6 +82,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/orders" element={<OrderHistoryPage />} />
       </Routes>
     </>
   );
