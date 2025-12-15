@@ -1,5 +1,6 @@
-import React, { useState } from 'react'; // Bỏ useEffect vì không cần dùng nữa
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+// 1. Thêm useLocation vào đây
+import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import HomePage from './pages/HomePage.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
 import LoginPage from './pages/LoginPage.jsx';
@@ -10,6 +11,8 @@ import AdminOrderPage from './pages/admin/AdminOrderPage.jsx';
 
 function App() {
   const navigate = useNavigate();
+  // 2. Khai báo location để dùng cho isAdminRoute
+  const location = useLocation(); 
 
   const [user, setUser] = useState(() => {
       const userInfo = localStorage.getItem('user_info');
@@ -26,16 +29,12 @@ function App() {
 
   const isAdminRoute = location.pathname.startsWith('/admin');
 
-  // XÓA HẾT ĐOẠN useEffect(...) CŨ ĐI NHÉ
-
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user_info');
     setUser(null);
     navigate('/login');
   };
-
-  
 
   return (
     <>
@@ -46,9 +45,33 @@ function App() {
           
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto align-items-center">
+              
+              {/* --- Nút Trang chủ --- */}
               <li className="nav-item">
                 <Link className="nav-link" to="/">Trang chủ</Link>
               </li>
+
+              {/* --- 3. NÚT QUẢN LÝ (MỚI THÊM VÀO ĐÂY) --- */}
+              <li className="nav-item">
+                <span 
+                    className="nav-link" 
+                    style={{cursor: 'pointer', fontWeight: 'bold', color: '#dc3545'}} 
+                    onClick={() => {
+                        const userInfo = localStorage.getItem('user_info');
+                        const currentUser = userInfo ? JSON.parse(userInfo) : null;
+                        
+                        if (currentUser && currentUser.role === 'admin') {
+                            window.location.href = '/admin/orders'; // Chuyển trang
+                        } else {
+                            alert("Chỉ Admin mới có quyền truy cập vào trang Quản lý!");
+                        }
+                    }}
+                >
+                    Quản lý
+                </span>
+              </li>
+              {/* ------------------------------------------- */}
+
               <li className="nav-item">
                 <Link className="nav-link" to="/cart">Giỏ hàng</Link>
               </li>
@@ -80,19 +103,18 @@ function App() {
           </div>
         </div>
       </nav>
-        )}
+      )}
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/orders" element={<OrderHistoryPage />} />
-
-
+        
         <Route path="/admin" element={<AdminLayout />}>
             <Route path="orders" element={<AdminOrderPage />} />
         </Route>
-
       </Routes>
       
     </>
