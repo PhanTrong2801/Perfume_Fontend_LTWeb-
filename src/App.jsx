@@ -9,9 +9,7 @@ import OrderHistoryPage from './pages/OrderHistoryPage';
 function App() {
   const navigate = useNavigate();
 
-  // --- SỬA ĐOẠN NÀY ---
-  // Khởi tạo state bằng một hàm (Lazy Initialization)
-  // Code này chỉ chạy 1 lần duy nhất khi load trang
+  const location = useLocation();
   const [user, setUser] = useState(() => {
       const userInfo = localStorage.getItem('user_info');
       if (userInfo) {
@@ -25,6 +23,8 @@ function App() {
       return null;
   });
 
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
   // XÓA HẾT ĐOẠN useEffect(...) CŨ ĐI NHÉ
 
   const handleLogout = () => {
@@ -34,8 +34,11 @@ function App() {
     navigate('/login');
   };
 
+  
+
   return (
     <>
+      {!isAdminRoute && (
       <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm">
         <div className="container">
           <Link className="navbar-brand fw-bold" to="/">PERFUME STORE</Link>
@@ -76,14 +79,21 @@ function App() {
           </div>
         </div>
       </nav>
-
+        )}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/orders" element={<OrderHistoryPage />} />
+
+
+        <Route path="/admin" element={<AdminLayout />}>
+            <Route path="orders" element={<AdminOrderPage />} />
+        </Route>
+
       </Routes>
+      
     </>
   );
 }
