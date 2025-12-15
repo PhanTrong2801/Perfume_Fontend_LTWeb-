@@ -8,6 +8,8 @@ import CartPage from './pages/CartPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import AdminLayout from './components/AdminLayout.jsx';
 import AdminOrderPage from './pages/admin/AdminOrderPage.jsx';
+import AdminProductList from './pages/admin/AdminProductList.jsx';
+import AdminProductForm from './pages/admin/AdminProductForm.jsx';
 
 function App() {
   const navigate = useNavigate();
@@ -111,9 +113,13 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/orders" element={<OrderHistoryPage />} />
-        
+
         <Route path="/admin" element={<AdminLayout />}>
             <Route path="orders" element={<AdminOrderPage />} />
+
+            <Route path="products" element={<AdminProductList />} />
+            <Route path="products/new" element={<AdminProductForm />} />
+            <Route path="products/edit/:id" element={<AdminProductForm />} />
         </Route>
       </Routes>
       
