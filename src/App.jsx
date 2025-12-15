@@ -9,7 +9,6 @@ import OrderHistoryPage from './pages/OrderHistoryPage';
 function App() {
   const navigate = useNavigate();
 
-  const location = useLocation();
   const [user, setUser] = useState(() => {
       const userInfo = localStorage.getItem('user_info');
       if (userInfo) {
