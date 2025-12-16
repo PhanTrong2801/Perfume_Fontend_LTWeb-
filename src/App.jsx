@@ -47,23 +47,19 @@ function App() {
           
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto align-items-center">
-              
-              {/* --- Nút Trang chủ --- */}
-              <li className="nav-item">
-                <Link className="nav-link" to="/">Trang chủ</Link>
-              </li>
 
-              {/* --- 3. NÚT QUẢN LÝ (MỚI THÊM VÀO ĐÂY) --- */}
+
+              {/* --- NÚT QUẢN LÝ  */}
               <li className="nav-item">
                 <span 
                     className="nav-link" 
-                    style={{cursor: 'pointer', fontWeight: 'bold', color: '#dc3545'}} 
+                    style={{cursor: 'pointer', fontWeight: 'bold'}} 
                     onClick={() => {
                         const userInfo = localStorage.getItem('user_info');
                         const currentUser = userInfo ? JSON.parse(userInfo) : null;
                         
                         if (currentUser && currentUser.role === 'admin') {
-                            window.location.href = '/admin/orders'; // Chuyển trang
+                            window.location.href = '/admin/orders'; 
                         } else {
                             alert("Chỉ Admin mới có quyền truy cập vào trang Quản lý!");
                         }
@@ -72,7 +68,11 @@ function App() {
                     Quản lý
                 </span>
               </li>
-              {/* ------------------------------------------- */}
+                            
+              {/* --- Nút Trang chủ --- */}
+              <li className="nav-item">
+                <Link className="nav-link" to="/">Trang chủ</Link>
+              </li>
 
               <li className="nav-item">
                 <Link className="nav-link" to="/cart">Giỏ hàng</Link>

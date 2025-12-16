@@ -50,6 +50,20 @@ const HomePage = () => {
         setCurrentPage(1);
     }, [filterGender, searchTerm, products]);
 
+    // --- HÀM MỚI: Vừa lọc giới tính, vừa cuộn xuống danh sách ---
+    const handleFilterAndScroll = (gender) => {
+        // 1. Cập nhật bộ lọc
+        setFilterGender(gender);
+        setSearchTerm(''); // Xóa tìm kiếm cũ để hiện đúng danh sách
+        
+        // 2. Cuộn mượt xuống phần danh sách sản phẩm
+        const section = document.getElementById('product-list');
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+    // -----------------------------------------------------------
+
     // Phân trang
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -75,41 +89,55 @@ const HomePage = () => {
             <div className="flex-grow-1">
                 
                 {/* --- 1. HERO CAROUSEL (SLIDER) --- */}
+                {/* Thêm data-bs-interval="3000" để tự chạy mỗi 3 giây */}
                 <div id="heroCarousel" className="carousel slide mb-5" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" className="active"></button>
                         <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
                         <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
                     </div>
+                    
                     <div className="carousel-inner">
-                        {/* Slide 1 */}
+                        {/* Slide 1: Chung */}
                         <div className="carousel-item active" data-bs-interval="3000" style={{height: '500px'}}>
-                            <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?q=80&w=2070" className="d-block w-100 h-100" style={{objectFit: 'cover', filter: 'brightness(0.7)'}} alt="..." />
+                            <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?q=80&w=2070" className="d-block w-100 h-100" style={{objectFit: 'cover', filter: 'brightness(0.7)'}} alt="Luxury Perfume" />
                             <div className="carousel-caption d-none d-md-block text-start" style={{top: '30%', left: '10%'}}>
                                 <h1 className="display-3 fw-bold text-uppercase">Đẳng cấp mùi hương</h1>
                                 <p className="lead fs-4">Khám phá bộ sưu tập nước hoa sang trọng từ những thương hiệu hàng đầu.</p>
-                                <a href="#product-list" className="btn btn-light btn-lg px-5 mt-3 fw-bold rounded-0">MUA NGAY</a>
+                                {/* Nút Mua Ngay -> Hiện Tất cả */}
+                                <button className="btn btn-light btn-lg px-5 mt-3 fw-bold rounded-0" onClick={() => handleFilterAndScroll('ALL')}>
+                                    MUA NGAY
+                                </button>
                             </div>
                         </div>
-                        {/* Slide 2 */}
+
+                        {/* Slide 2: Nam */}
                         <div className="carousel-item" data-bs-interval="3000" style={{height: '500px'}}>
-                            <img src="https://images.unsplash.com/photo-1557170334-a9632e77c6e4?q=80&w=2070" className="d-block w-100 h-100" style={{objectFit: 'cover', filter: 'brightness(0.6)'}} alt="..." />
+                            <img src="https://images.unsplash.com/photo-1557170334-a9632e77c6e4?q=80&w=2070" className="d-block w-100 h-100" style={{objectFit: 'cover', filter: 'brightness(0.6)'}} alt="Men Perfume" />
                             <div className="carousel-caption d-none d-md-block" style={{top: '35%'}}>
                                 <h2 className="display-4 fw-bold">Dành cho Phái Mạnh</h2>
                                 <p className="fs-5">Mạnh mẽ, lôi cuốn và đầy bản lĩnh.</p>
-                                <button className="btn btn-outline-light btn-lg px-4 rounded-0" onClick={() => setFilterGender('Male')}>Xem BST Nam</button>
+                                {/* Nút Xem BST Nam -> Lọc Nam & Cuộn xuống */}
+                                <button className="btn btn-outline-light btn-lg px-4 rounded-0" onClick={() => handleFilterAndScroll('Male')}>
+                                    Xem BST Nam
+                                </button>
                             </div>
                         </div>
-                        {/* Slide 3 */}
+
+                        {/* Slide 3: Nữ (ĐÃ THAY ẢNH MỚI ĐỂ KHÔNG BỊ TRẮNG) */}
                         <div className="carousel-item" data-bs-interval="3000" style={{height: '500px'}}>
-                            <img src="https://images.unsplash.com/photo-1595867355202-e2233ce93282?q=80&w=2070" className="d-block w-100 h-100" style={{objectFit: 'cover', filter: 'brightness(0.7)'}} alt="..." />
+                            <img src="https://images.unsplash.com/photo-1592914610354-fd354ea45e48?q=80&w=2070" className="d-block w-100 h-100" style={{objectFit: 'cover', filter: 'brightness(0.7)'}} alt="Women Perfume" />
                             <div className="carousel-caption d-none d-md-block text-end" style={{top: '30%', right: '10%'}}>
                                 <h2 className="display-4 fw-bold">Quyến rũ & Tinh tế</h2>
                                 <p className="fs-5">Những nốt hương ngọt ngào dành riêng cho nàng.</p>
-                                <button className="btn btn-outline-light btn-lg px-4 rounded-0" onClick={() => setFilterGender('Female')}>Xem BST Nữ</button>
+                                {/* Nút Xem BST Nữ -> Lọc Nữ & Cuộn xuống */}
+                                <button className="btn btn-outline-light btn-lg px-4 rounded-0" onClick={() => handleFilterAndScroll('Female')}>
+                                    Xem BST Nữ
+                                </button>
                             </div>
                         </div>
                     </div>
+
                     <button className="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
                         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                     </button>
@@ -118,14 +146,14 @@ const HomePage = () => {
                     </button>
                 </div>
 
-                {/* --- 2. SERVICE FEATURES (LÝ DO MUA HÀNG) --- */}
+                {/* --- 2. SERVICE FEATURES --- */}
                 <div className="container mb-5">
                     <div className="row text-center g-4">
                         <div className="col-md-4">
                             <div className="p-4 border rounded shadow-sm h-100">
                                 <i className="bi bi-patch-check-fill text-dark display-4 mb-3"></i>
                                 <h5 className="fw-bold">100% Chính Hãng</h5>
-                                <p className="text-muted small mb-0">Cam kết hoàn tiền gấp đôi nếu phát hiện hàng giả, hàng nhái.</p>
+                                <p className="text-muted small mb-0">Cam kết hoàn tiền gấp đôi nếu phát hiện hàng giả.</p>
                             </div>
                         </div>
                         <div className="col-md-4">
@@ -139,13 +167,13 @@ const HomePage = () => {
                             <div className="p-4 border rounded shadow-sm h-100">
                                 <i className="bi bi-headset text-dark display-4 mb-3"></i>
                                 <h5 className="fw-bold">Hỗ Trợ 24/7</h5>
-                                <p className="text-muted small mb-0">Đội ngũ tư vấn chuyên nghiệp, am hiểu về mùi hương.</p>
+                                <p className="text-muted small mb-0">Đội ngũ tư vấn chuyên nghiệp, am hiểu mùi hương.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* --- 3. PROMO BANNER --- */}
+                {/* --- 3. PROMO BANNER (Cũng thêm nút cuộn xuống) --- */}
                 <div className="container-fluid bg-light py-5 mb-5">
                     <div className="container">
                         <div className="row align-items-center">
@@ -155,14 +183,16 @@ const HomePage = () => {
                             <div className="col-md-6 ps-md-5">
                                 <span className="text-danger fw-bold text-uppercase ls-2">Khuyến mãi đặc biệt</span>
                                 <h2 className="display-5 fw-bold mt-2 mb-4">Bộ Sưu Tập Mùa Hè</h2>
-                                <p className="lead text-muted mb-4">Trải nghiệm sự tươi mát bất tận với những nốt hương cam chanh và biển cả. Giảm giá lên đến 20% cho các dòng sản phẩm Summer Vibes.</p>
-                                <a href="#product-list" className="btn btn-dark btn-lg rounded-0 px-4">Xem Chi Tiết</a>
+                                <p className="lead text-muted mb-4">Trải nghiệm sự tươi mát bất tận với những nốt hương cam chanh và biển cả.</p>
+                                <button className="btn btn-dark btn-lg rounded-0 px-4" onClick={() => handleFilterAndScroll('ALL')}>
+                                    Xem Chi Tiết
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* --- KHU VỰC SẢN PHẨM CHÍNH --- */}
+                {/* --- KHU VỰC SẢN PHẨM CHÍNH (Đã gắn ID để cuộn tới) --- */}
                 <div className="container" id="product-list">
                     <div className="text-center mb-5">
                         <h2 className="fw-bold text-uppercase">Sản Phẩm Mới Nhất</h2>
@@ -203,7 +233,6 @@ const HomePage = () => {
                                 <div key={product.product_id} className="col-md-3 col-sm-6 mb-4">
                                     <div className="card h-100 border-0 shadow-hover product-card">
                                         <div className="position-relative overflow-hidden bg-white text-center p-4" style={{height: '300px'}}>
-                                            {/* Badge Mới */}
                                             <span className="position-absolute top-0 start-0 bg-danger text-white px-2 py-1 small m-2 rounded">NEW</span>
                                             
                                             <img 
