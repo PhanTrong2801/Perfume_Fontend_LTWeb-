@@ -8,7 +8,7 @@ function ProductDetail() {
     
     const [product, setProduct] = useState(null);
     const [selectedVariant, setSelectedVariant] = useState(null);
-    const [quantity, setQuantity] = useState(1); // Thêm state số lượng mua
+    const [quantity, setQuantity] = useState(1);
 
     const API_URL = import.meta.env.VITE_API_BASE_URL;
     useEffect(() => {
@@ -22,9 +22,8 @@ function ProductDetail() {
             .catch(err => console.error(err));
     }, [id]);
 
-    // --- HÀM XỬ LÝ THÊM VÀO GIỎ ---
+    //  HÀM XỬ LÝ THÊM VÀO GIỎ 
     const handleAddToCart = () => {
-        // 1. Kiểm tra đã đăng nhập chưa
         const token = localStorage.getItem('token');
         if (!token) {
             alert("Bạn cần đăng nhập để mua hàng!");
@@ -34,13 +33,13 @@ function ProductDetail() {
 
         if (!selectedVariant) return;
 
-        // 2. Gửi Request lên Server
+        // Gửi Request lên Server
         const data = {
             variant_id: selectedVariant.variant_id,
             quantity: quantity
         };
 
-        // Quan trọng: Gửi kèm Token trong Header
+        //  Gửi kèm Token trong Header
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -49,7 +48,7 @@ function ProductDetail() {
 
         axios.post(`${API_URL}/api/cart/add`, data, config)
             .then(res => {
-                alert(res.data.message); // "Đã thêm vào giỏ hàng thành công!"
+                alert(res.data.message); 
             })
             .catch(err => {
                 console.error(err);
@@ -106,7 +105,7 @@ function ProductDetail() {
                     <button 
                         className="btn btn-success btn-lg w-100"
                         onClick={handleAddToCart}
-                        disabled={!selectedVariant} // Khóa nút nếu chưa chọn biến thể
+                        disabled={!selectedVariant}
                     >
                         <i className="bi bi-cart-plus me-2"></i> Thêm vào giỏ hàng
                     </button>

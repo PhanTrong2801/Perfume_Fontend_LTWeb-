@@ -3,12 +3,11 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function AdminProductForm() {
-    const { id } = useParams(); // Nếu có id là Sửa, không có là Thêm
+    const { id } = useParams(); 
     const navigate = useNavigate();
     const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000';
     const isEdit = Boolean(id);
 
-    // Data dropdown
     const [brands, setBrands] = useState([]);
     const [categories, setCategories] = useState([]);
 
@@ -18,15 +17,15 @@ function AdminProductForm() {
     const [gender, setGender] = useState('Unisex');
     const [brandId, setBrandId] = useState('');
     const [categoryId, setCategoryId] = useState('');
-    const [thumbnail, setThumbnail] = useState(null); // File object
-    const [previewImg, setPreviewImg] = useState(''); // URL để hiện ảnh preview
+    const [thumbnail, setThumbnail] = useState(null); 
+    const [previewImg, setPreviewImg] = useState(''); 
 
     // Variants State: Mảng các object
     const [variants, setVariants] = useState([
         { volume: '', price: '', stock_quantity: '', sku: '' }
     ]);
 
-    // 1. Load dữ liệu Brands/Categories và Product (nếu là edit)
+    //  Load dữ liệu Brands/Categories và Product 
     useEffect(() => {
         const token = localStorage.getItem('token');
         const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -48,7 +47,7 @@ function AdminProductForm() {
                     setGender(p.gender);
                     setBrandId(p.brand_id);
                     setCategoryId(p.category_id);
-                    setPreviewImg(p.thumbnail); // Link ảnh cũ
+                    setPreviewImg(p.thumbnail); 
                     setVariants(p.variants);
                 });
         }
@@ -84,13 +83,12 @@ function AdminProductForm() {
         formData.append('category_id', categoryId);
         
         if (thumbnail) {
-            formData.append('thumbnail', thumbnail); // Gửi file mới
+            formData.append('thumbnail', thumbnail); 
         }
         
-        // Gửi variants dưới dạng JSON String
         formData.append('variants', JSON.stringify(variants));
 
-        // Nếu là Edit thì dùng POST (với _method=PUT để Laravel hiểu) vì FormData không hỗ trợ PUT trực tiếp tốt
+
         if (isEdit) {
             formData.append('_method', 'PUT'); 
             axios.post(`${API_URL}/api/admin/products/${id}`, formData, {
@@ -102,7 +100,6 @@ function AdminProductForm() {
             .then(() => { alert("Cập nhật thành công!"); navigate('/admin/products'); })
             .catch(err => console.error(err));
         } else {
-            // Thêm mới
             axios.post(`${API_URL}/api/admin/products`, formData, {
                 headers: { 
                     Authorization: `Bearer ${token}`,
@@ -207,7 +204,7 @@ function AdminProductForm() {
                             const file = e.target.files[0];
                             if (file) {
                                 setThumbnail(file);
-                                setPreviewImg(URL.createObjectURL(file)); // Xem thử ảnh ngay khi chọn
+                                setPreviewImg(URL.createObjectURL(file)); 
                             }
                         }} />
                     </div>

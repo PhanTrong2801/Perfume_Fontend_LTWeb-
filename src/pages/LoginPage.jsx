@@ -18,13 +18,13 @@ function LoginPage() {
 
         axios.post(`${API_URL}/api/login`, formData)
             .then(res => {
-                // LƯU TOKEN VÀO LOCAL STORAGE QUAN TRỌNG
+                // LƯU TOKEN VÀO LOCAL STORAGE
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('user_info', JSON.stringify(res.data.user));
                 
                 alert('Đăng nhập thành công!');
-                navigate('/'); // Chuyển về trang chủ
-                window.location.reload(); // Reload để cập nhật thanh menu
+                navigate('/'); 
+                window.location.reload(); 
             })
             .catch(() => {
                 setError('Sai tên đăng nhập hoặc mật khẩu!');

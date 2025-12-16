@@ -7,7 +7,6 @@ const Footer = () => {
             <div className="container text-md-left">
                 <div className="row text-center text-md-start">
                     
-                    {/* Cột 1: Giới thiệu */}
                     <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h5 className="text-uppercase mb-4 font-weight-bold text-warning">Perfume Store</h5>
                         <p>
@@ -16,7 +15,7 @@ const Footer = () => {
                         </p>
                     </div>
 
-                    {/* Cột 2: Sản phẩm */}
+
                     <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h5 className="text-uppercase mb-4 font-weight-bold text-warning">Sản phẩm</h5>
                         <p><Link to="/" className="text-white text-decoration-none">Nước hoa Nam</Link></p>
@@ -25,7 +24,7 @@ const Footer = () => {
                         <p><Link to="/" className="text-white text-decoration-none">Gift Set</Link></p>
                     </div>
 
-                    {/* Cột 3: Hỗ trợ */}
+
                     <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h5 className="text-uppercase mb-4 font-weight-bold text-warning">Hỗ trợ</h5>
                         <p><a href="#" className="text-white text-decoration-none">Tài khoản</a></p>
@@ -34,7 +33,7 @@ const Footer = () => {
                         <p><a href="#" className="text-white text-decoration-none">Trợ giúp</a></p>
                     </div>
 
-                    {/* Cột 4: Liên hệ */}
+
                     <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h5 className="text-uppercase mb-4 font-weight-bold text-warning">Liên hệ</h5>
                         <p><i className="bi bi-house-door me-2"></i> Quận 1, TP. Hồ Chí Minh</p>

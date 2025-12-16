@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// 1. Thêm useLocation vào đây
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import HomePage from './pages/HomePage.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
@@ -13,7 +12,7 @@ import AdminProductForm from './pages/admin/AdminProductForm.jsx';
 
 function App() {
   const navigate = useNavigate();
-  // 2. Khai báo location để dùng cho isAdminRoute
+
   const location = useLocation(); 
 
   const [user, setUser] = useState(() => {

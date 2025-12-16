@@ -7,15 +7,13 @@ function CartPage() {
     const [loading, setLoading] = useState(true);
     
     // State cho việc thanh toán
-    const [showCheckout, setShowCheckout] = useState(false); // Hiện form thanh toán hay không
+    const [showCheckout, setShowCheckout] = useState(false);
     const [address, setAddress] = useState('');
-    const [paymentMethod, setPaymentMethod] = useState('COD'); // Mặc định COD
+    const [paymentMethod, setPaymentMethod] = useState('COD'); 
     
     const navigate = useNavigate();
     const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000';
 
-    // ... (Giữ nguyên hàm fetchCart, handleRemove, handleUpdateQuantity như cũ) ...
-    // ĐỂ TIẾT KIỆM KHÔNG GIAN, TÔI CHỈ VIẾT LẠI PHẦN MỚI, BẠN GIỮ CODE CŨ CỦA FETCH/REMOVE/UPDATE NHÉ
 
     const fetchCart = () => {
         const token = localStorage.getItem('token');
@@ -41,7 +39,7 @@ function CartPage() {
         .then(() => fetchCart());
     };
 
-    // --- HÀM XỬ LÝ THANH TOÁN (MỚI) ---
+    // HÀM XỬ LÝ THANH TOÁN
     const handleCheckout = (e) => {
         e.preventDefault();
         const token = localStorage.getItem('token');
@@ -61,7 +59,6 @@ function CartPage() {
         })
         .then(res => {
             alert("Đặt hàng thành công! Mã đơn: #" + res.data.order_id);
-            // Chuyển hướng sang trang theo dõi đơn hàng
             navigate('/orders');
         })
         .catch(err => {
@@ -82,7 +79,6 @@ function CartPage() {
         <div className="container mt-5">
             <h2 className="mb-4">Giỏ hàng của bạn</h2>
             <div className="row">
-                {/* Cột Danh sách sản phẩm (Giữ nguyên giao diện cũ) */}
                 <div className="col-md-8">
                     <div className="card shadow-sm">
                         <div className="card-body">
@@ -106,7 +102,7 @@ function CartPage() {
                     </div>
                 </div>
 
-                {/* Cột Thanh toán (Cập nhật Mới) */}
+                {/* Cột Thanh toán  */}
                 <div className="col-md-4">
                     <div className="card shadow-sm mb-3">
                         <div className="card-header bg-white fw-bold">Tổng quan đơn hàng</div>
@@ -121,7 +117,6 @@ function CartPage() {
                                     TIẾN HÀNH THANH TOÁN
                                 </button>
                             ) : (
-                                // Form Nhập địa chỉ hiện ra khi bấm nút
                                 <form onSubmit={handleCheckout}>
                                     <div className="mb-3">
                                         <label className="form-label">Địa chỉ nhận hàng:</label>

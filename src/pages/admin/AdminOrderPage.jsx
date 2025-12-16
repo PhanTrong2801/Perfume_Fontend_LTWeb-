@@ -30,7 +30,7 @@ function AdminOrderPage() {
         )
         .then(() => {
             alert("Cập nhật thành công!");
-            fetchOrders(); // Load lại dữ liệu
+            fetchOrders(); 
         })
         .catch(() => alert("Lỗi cập nhật!"));
     };

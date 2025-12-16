@@ -19,7 +19,6 @@ const HomePage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 8;
 
-    // Gọi API
     useEffect(() => {
         axios.get(`${API_URL}/api/products`)
             .then(response => {
@@ -50,19 +49,15 @@ const HomePage = () => {
         setCurrentPage(1);
     }, [filterGender, searchTerm, products]);
 
-    // --- HÀM MỚI: Vừa lọc giới tính, vừa cuộn xuống danh sách ---
     const handleFilterAndScroll = (gender) => {
-        // 1. Cập nhật bộ lọc
         setFilterGender(gender);
-        setSearchTerm(''); // Xóa tìm kiếm cũ để hiện đúng danh sách
+        setSearchTerm(''); 
         
-        // 2. Cuộn mượt xuống phần danh sách sản phẩm
         const section = document.getElementById('product-list');
         if (section) {
             section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
-    // -----------------------------------------------------------
 
     // Phân trang
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -89,7 +84,6 @@ const HomePage = () => {
             <div className="flex-grow-1">
                 
                 {/* --- 1. HERO CAROUSEL (SLIDER) --- */}
-                {/* Thêm data-bs-interval="3000" để tự chạy mỗi 3 giây */}
                 <div id="heroCarousel" className="carousel slide mb-5" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" className="active"></button>
@@ -104,7 +98,6 @@ const HomePage = () => {
                             <div className="carousel-caption d-none d-md-block text-start" style={{top: '30%', left: '10%'}}>
                                 <h1 className="display-3 fw-bold text-uppercase">Đẳng cấp mùi hương</h1>
                                 <p className="lead fs-4">Khám phá bộ sưu tập nước hoa sang trọng từ những thương hiệu hàng đầu.</p>
-                                {/* Nút Mua Ngay -> Hiện Tất cả */}
                                 <button className="btn btn-light btn-lg px-5 mt-3 fw-bold rounded-0" onClick={() => handleFilterAndScroll('ALL')}>
                                     MUA NGAY
                                 </button>
@@ -117,20 +110,18 @@ const HomePage = () => {
                             <div className="carousel-caption d-none d-md-block" style={{top: '35%'}}>
                                 <h2 className="display-4 fw-bold">Dành cho Phái Mạnh</h2>
                                 <p className="fs-5">Mạnh mẽ, lôi cuốn và đầy bản lĩnh.</p>
-                                {/* Nút Xem BST Nam -> Lọc Nam & Cuộn xuống */}
                                 <button className="btn btn-outline-light btn-lg px-4 rounded-0" onClick={() => handleFilterAndScroll('Male')}>
                                     Xem BST Nam
                                 </button>
                             </div>
                         </div>
 
-                        {/* Slide 3: Nữ (ĐÃ THAY ẢNH MỚI ĐỂ KHÔNG BỊ TRẮNG) */}
+                        {/* Slide 3: Nữ  */}
                         <div className="carousel-item" data-bs-interval="3000" style={{height: '500px'}}>
                             <img src="https://images.unsplash.com/photo-1592914610354-fd354ea45e48?q=80&w=2070" className="d-block w-100 h-100" style={{objectFit: 'cover', filter: 'brightness(0.7)'}} alt="Women Perfume" />
                             <div className="carousel-caption d-none d-md-block text-end" style={{top: '30%', right: '10%'}}>
                                 <h2 className="display-4 fw-bold">Quyến rũ & Tinh tế</h2>
                                 <p className="fs-5">Những nốt hương ngọt ngào dành riêng cho nàng.</p>
-                                {/* Nút Xem BST Nữ -> Lọc Nữ & Cuộn xuống */}
                                 <button className="btn btn-outline-light btn-lg px-4 rounded-0" onClick={() => handleFilterAndScroll('Female')}>
                                     Xem BST Nữ
                                 </button>
@@ -192,7 +183,7 @@ const HomePage = () => {
                     </div>
                 </div>
 
-                {/* --- KHU VỰC SẢN PHẨM CHÍNH (Đã gắn ID để cuộn tới) --- */}
+                {/* --- KHU VỰC SẢN PHẨM CHÍNH  */}
                 <div className="container" id="product-list">
                     <div className="text-center mb-5">
                         <h2 className="fw-bold text-uppercase">Sản Phẩm Mới Nhất</h2>
