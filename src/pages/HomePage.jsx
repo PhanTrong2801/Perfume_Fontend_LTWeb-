@@ -83,7 +83,7 @@ const HomePage = () => {
                     </div>
                     <div className="carousel-inner">
                         {/* Slide 1 */}
-                        <div className="carousel-item active" style={{height: '500px'}}>
+                        <div className="carousel-item active" data-bs-interval="3000" style={{height: '500px'}}>
                             <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?q=80&w=2070" className="d-block w-100 h-100" style={{objectFit: 'cover', filter: 'brightness(0.7)'}} alt="..." />
                             <div className="carousel-caption d-none d-md-block text-start" style={{top: '30%', left: '10%'}}>
                                 <h1 className="display-3 fw-bold text-uppercase">Đẳng cấp mùi hương</h1>
@@ -92,7 +92,7 @@ const HomePage = () => {
                             </div>
                         </div>
                         {/* Slide 2 */}
-                        <div className="carousel-item" style={{height: '500px'}}>
+                        <div className="carousel-item" data-bs-interval="3000" style={{height: '500px'}}>
                             <img src="https://images.unsplash.com/photo-1557170334-a9632e77c6e4?q=80&w=2070" className="d-block w-100 h-100" style={{objectFit: 'cover', filter: 'brightness(0.6)'}} alt="..." />
                             <div className="carousel-caption d-none d-md-block" style={{top: '35%'}}>
                                 <h2 className="display-4 fw-bold">Dành cho Phái Mạnh</h2>
@@ -101,7 +101,7 @@ const HomePage = () => {
                             </div>
                         </div>
                         {/* Slide 3 */}
-                        <div className="carousel-item" style={{height: '500px'}}>
+                        <div className="carousel-item" data-bs-interval="3000" style={{height: '500px'}}>
                             <img src="https://images.unsplash.com/photo-1595867355202-e2233ce93282?q=80&w=2070" className="d-block w-100 h-100" style={{objectFit: 'cover', filter: 'brightness(0.7)'}} alt="..." />
                             <div className="carousel-caption d-none d-md-block text-end" style={{top: '30%', right: '10%'}}>
                                 <h2 className="display-4 fw-bold">Quyến rũ & Tinh tế</h2>
